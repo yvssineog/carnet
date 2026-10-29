@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 148" role="img" aria-labelledby="title desc">
+  <title id="title">From MDX file to rendered page</title>
+  <desc id="desc">An MDX source file is read by the server and becomes a page for the visitor.</desc>
+  <rect width="720" height="148" rx="14" fill="#f1eee6"/>
+  <rect x="32" y="32" width="174" height="84" rx="12" fill="#fff" stroke="#d8d3c7"/>
+  <text x="119" y="68" text-anchor="middle" fill="#2d332f" font-family="system-ui,sans-serif" font-size="17" font-weight="600">MDX file</text>
+  <text x="119" y="91" text-anchor="middle" fill="#788078" font-family="system-ui,sans-serif" font-size="12">notes/course/note.mdx</text>
+  <path d="M226 74h66m-12-10 12 10-12 10" fill="none" stroke="#637966" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="306" y="32" width="134" height="84" rx="12" fill="#e1e8db" stroke="#bccbbb"/>
+  <text x="373" y="68" text-anchor="middle" fill="#2d332f" font-family="system-ui,sans-serif" font-size="17" font-weight="600">Server</text>
+  <text x="373" y="91" text-anchor="middle" fill="#637966" font-family="system-ui,sans-serif" font-size="12">renders MDX</text>
+  <path d="M460 74h66m-12-10 12 10-12 10" fill="none" stroke="#637966" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="540" y="32" width="148" height="84" rx="12" fill="#fff" stroke="#d8d3c7"/>
+  <text x="614" y="68" text-anchor="middle" fill="#2d332f" font-family="system-ui,sans-serif" font-size="17" font-weight="600">Reader</text>
+  <text x="614" y="91" text-anchor="middle" fill="#788078" font-family="system-ui,sans-serif" font-size="12">receives a page</text>
+</svg>
