@@ -1,10 +1,8 @@
 import Link from "next/link";
-import { connection } from "next/server";
 import { ReaderShell } from "@/components/reader-shell";
 import { labelFromSegment, listNotes } from "@/lib/notes";
 
 export default async function HomePage() {
-  await connection();
   const notes = await listNotes();
   const courses = [...new Set(notes.map((note) => note.segments[0]))];
 

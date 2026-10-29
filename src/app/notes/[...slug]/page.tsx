@@ -1,20 +1,23 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { connection } from "next/server";
 import { ReaderShell } from "@/components/reader-shell";
 import { getNote, labelFromSegment, listNotes } from "@/lib/notes";
 import { renderMdx } from "@/lib/render-mdx";
 
 type Props = { params: Promise<{ slug: string[] }> };
 
+export async function generateStaticParams() {
+  if (process.env.NODE_ENV === "development") return [];
+  const notes = await listNotes();
+  return notes.map((note) => ({ slug: note.segments }));
+}
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  await connection();
   const note = await getNote((await params).slug);
   return { title: note?.title ?? "Note not found" };
 }
 
 export default async function NotePage({ params }: Props) {
-  await connection();
   const note = await getNote((await params).slug);
   if (!note) notFound();
   const notes = await listNotes();

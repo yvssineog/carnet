@@ -11,12 +11,38 @@ function Note({ children }: { children: React.ReactNode }) {
 }
 
 const components = { Note };
+const compiledNotes = new Map<string, ReturnType<typeof evaluate>>();
+const maxCompiledNotes = 32;
 
 export async function renderMdx(source: string) {
-  const { default: Content } = await evaluate(source, {
-    ...runtime,
-    remarkPlugins: [remarkGfm, remarkMath],
-    rehypePlugins: [rehypeSlug, [rehypeShiki, { themes: { light: "github-light", dark: "github-dark" }, defaultColor: "dark" }], rehypeKatex],
-  });
-  return <Content components={components} />;
+  let compilation = compiledNotes.get(source);
+  if (!compilation) {
+    compilation = evaluate(source, {
+      ...runtime,
+      remarkPlugins: [remarkGfm, remarkMath],
+      rehypePlugins: [
+        rehypeSlug,
+        rehypeKatex,
+        [rehypeShiki, {
+          themes: { light: "github-light", dark: "github-dark" },
+          defaultColor: "dark",
+          langs: [],
+          lazy: true,
+          fallbackLanguage: "text",
+        }],
+      ],
+    });
+    compiledNotes.set(source, compilation);
+    if (compiledNotes.size > maxCompiledNotes) {
+      compiledNotes.delete(compiledNotes.keys().next().value!);
+    }
+  }
+
+  try {
+    const { default: Content } = await compilation;
+    return <Content components={components} />;
+  } catch (error) {
+    if (compiledNotes.get(source) === compilation) compiledNotes.delete(source);
+    throw error;
+  }
 }

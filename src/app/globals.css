@@ -37,7 +37,6 @@
 }
 
 html {
-  scroll-behavior: smooth;
   -webkit-tap-highlight-color: transparent;
 }
 
@@ -346,6 +345,5 @@ summary::marker {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
   .nav-note, .nav-folder-label::after, .index-note, .theme-toggle { transition: none; }
 }
